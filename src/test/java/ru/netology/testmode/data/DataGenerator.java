@@ -14,7 +14,7 @@ import static io.restassured.RestAssured.given;
 public class DataGenerator {
     private static final RequestSpecification requestSpec = new RequestSpecBuilder()
             .setBaseUri("http://localhost")
-            .setPort(7777)
+            .setPort(9999)
             .setAccept(ContentType.JSON)
             .setContentType(ContentType.JSON)
             .log(LogDetail.ALL)
@@ -28,7 +28,7 @@ public class DataGenerator {
 
         given()
                 .spec(requestSpec)
-                .body(new RegistrationDto(user.login, user.password, user.status))
+                .body(user)
                 .when()
                 .post("/api/system/users")
                 .then()
@@ -52,12 +52,12 @@ public class DataGenerator {
         }
 
         public static RegistrationDto getUser(String status) {
-            RegistrationDto user = new RegistrationDto(getRandomLogin(), getRandomPassword(), status);
+            var user = new RegistrationDto(getRandomLogin(), getRandomPassword(), status);
             return user;
         }
 
         public static RegistrationDto getRegisteredUser(String status) {
-            RegistrationDto registeredUser = getUser(status);
+            var registeredUser = getUser(status);
             sendRequest(registeredUser);
             return registeredUser;
         }
