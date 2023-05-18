@@ -51,8 +51,10 @@ public class DataGenerator {
         private Registration() {
         }
 
+
         public static RegistrationDto getUser(String status) {
-            var user = new RegistrationDto(getRandomLogin(), getRandomPassword(), status);
+
+            RegistrationDto user = new RegistrationDto( getRandomLogin(), getRandomPassword(),status );
             return user;
         }
 
